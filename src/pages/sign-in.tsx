@@ -13,7 +13,7 @@ export const SignIn = () => {
 
   const handleSignIn = (formData: FormData) => {
     (async () => {
-      const data = validator.sign_in_form.parse({
+      const data = validator.sign_in.parse({
         email: formData.get('email'),
         password: formData.get('password')
       })
