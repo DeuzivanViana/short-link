@@ -1,4 +1,14 @@
 -- CreateTable
+CREATE TABLE "link" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "clicks" BIGINT NOT NULL DEFAULT 0,
+    "redirect" TEXT NOT NULL,
+    "createdAt" DATETIME,
+    "updatedAt" DATETIME
+);
+
+-- CreateTable
 CREATE TABLE "user" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,

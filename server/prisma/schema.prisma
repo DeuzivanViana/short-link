@@ -11,10 +11,11 @@ datasource db {
 
 model Link {
   id            String    @id
-  clicks BigInt @default(0)
+  userId        String
+  clicks Int @default(0)
   redirect String
-  created_at DateTime?
-  updated_at DateTime?
+  createdAt DateTime?
+  updatedAt DateTime?
 
   @@map("link")
 }

@@ -25,7 +25,7 @@ export const SignUp = () => {
     })()
   } 
   return <div>
-    <form className='bg-neutral-900 text-neutral-50 p-6 rounded-lg m-auto w-[350px] flex flex-col gap-4 mt-[40%]' action={handleSignUp}>
+    <form className='bg-neutral-900 text-neutral-50 p-6 rounded-lg m-auto w-[350px] flex flex-col gap-4 mt-[25vh]' action={handleSignUp}>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Enter a email' type='email' name='email'/>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Type a password' type='password' name='password'/>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Confirm your password' type='password' name='password2'/>

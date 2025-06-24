@@ -5,7 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home } from './pages/home'
 import { SignUp } from './pages/sign-up'
 import { SignIn } from './pages/sign-in'
-import { SendLink } from './pages/send-link'
+import { CreateLink } from './pages/create'
+import { AccessLink } from './pages/access-link'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,7 +15,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/' element={ <Home/> }/>
         <Route path='/sign-up' element={ <SignUp/> }/>
         <Route path='/sign-in' element={ <SignIn/> }/>
-        <Route path='/send-link' element={ <SendLink/> }/>
+        <Route path='/create' element={ <CreateLink/> }/>
+        <Route path='/l/:id' element={ <AccessLink/> }/>
       </Routes>
     </BrowserRouter>
   </StrictMode>,

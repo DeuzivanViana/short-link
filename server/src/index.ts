@@ -19,28 +19,72 @@ app.use(express.json())
 app.post('/api/v1/link', async (req, res) => {
   try {
     const data = validator.link.parse(req.body)
-    const session = await auth.api.getSession({ headers: fromNodeHeaders(req.headers )})
+    const session = await auth.api.getSession({ headers: fromNodeHeaders(req.headers)})
     
-    // TODO - Specify owner ID
-    const link = await db.link.create({
-      data: {
-        id: cuid(),
-        redirect: data.redirect,
-        created_at: new Date(),
-        updated_at: new Date()
+    if(session?.user)
+    {
+      const link = await db.link.create({
+        data: {
+          id: cuid(),
+          redirect: data.redirect,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          userId: session?.user.id
+        }
+      })
+      
+      if(link) {
+        res.status(200).json(data)
+      } else {
+        throw Error('Unknow error')
       }
-    })
-
-    if(link) {
-      res.status(200).json(data)
-
-    } else {
-      throw Error('Unknow error')
-
     }
   } catch(err) {
 
     res.status(500).end()
+  }
+})
+
+app.get('/api/v1/link', async (req, res) => {
+  try {
+    const session = await auth.api.getSession({ headers: fromNodeHeaders(req.headers)})
+    if(session?.user)
+    {
+      const links = await db.link.findMany({
+        where: { userId: session.user.id }
+      })
+
+      res.status(200).json(links)
+    }
+  } catch(err) {
+    res.status(500).end()
+
+  }
+})
+
+app.get('/api/v1/link/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+
+    const link = await db.link.findFirst({
+      where: { id: id }
+    })
+
+    if(link) {
+      await db.link.update({
+        data: {
+          clicks: link?.clicks + 1
+        },
+        where: {
+          id: id
+        }
+      })
+    }
+
+    res.status(200).json(link)
+  } catch(err) {
+    res.status(500).end()
+
   }
 })
 

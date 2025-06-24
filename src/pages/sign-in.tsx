@@ -23,7 +23,7 @@ export const SignIn = () => {
   } 
 
   return <div>
-    <form action={handleSignIn} className='bg-neutral-900 text-neutral-50 p-6 rounded-lg m-auto w-[350px] flex flex-col gap-4 mt-[40%]'>
+    <form action={handleSignIn} className='bg-neutral-900 text-neutral-50 p-6 rounded-lg m-auto w-[350px] flex flex-col gap-4 mt-[25vh]'>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Enter your email' type='email' name='email'/>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Type your password' type='password' name='password'/>
       <button className='bg-blue-500 p-4 rounded-lg' type='submit'>Sign-In</button>
