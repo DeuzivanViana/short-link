@@ -1,7 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import { toNodeHandler } from 'better-auth/node'
+import { fromNodeHeaders, toNodeHandler } from 'better-auth/node'
 import { auth } from './auth'
+import { authClient } from './auth-client'
 
 const app = express()
 
@@ -10,7 +11,7 @@ app.use(cors({
   credentials: true,
   methods: ['get', 'post', 'delete', 'put']
 }))
-app.all('/api/auth/*splat', toNodeHandler(auth))
+app.all('/api/v1/auth/*splat', toNodeHandler(auth))
 app.use(express.json())
 
 app.listen(3333, () => {

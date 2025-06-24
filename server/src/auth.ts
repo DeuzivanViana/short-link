@@ -8,6 +8,7 @@ const client = new PrismaClient();
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL,
+  basePath: '/api/v1/auth',
   database: prismaAdapter(client, {
     provider: 'sqlite',
   }),
@@ -17,10 +18,6 @@ export const auth = betterAuth({
   appName: 'short-link',
   plugins: [jwt()],
   trustedOrigins: [
-    'http://192.168.1.107',
-    'http://localhost'
-  ],
-  logger: {
-    level: 'debug'
-  }
+    process.env.HOST_URL || 'http://localhost'
+  ]
 });
