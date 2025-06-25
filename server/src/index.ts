@@ -96,6 +96,25 @@ app.get('/api/v1/link/:id', async (req, res) => {
   }
 })
 
+app.delete('/api/v1/link/:id', async (req, res) => {
+  try {
+    const session = await auth.api.getSession({ headers: fromNodeHeaders(req.headers)})
+    const id = req.params.id
+
+    const link = await db.link.delete({
+      where: {
+        id: id,
+        userId: session?.user.id
+      }
+    })
+
+    res.status(200).json(link)
+  } catch(err) {
+    res.status(500).end()
+
+  }
+})
+
 app.listen(3333, () => {
   console.log('Backend is running at port 3333...')
 })

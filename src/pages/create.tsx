@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import { validator } from '../models/validator'
 
 export const CreateLink = () => {
+  const navigate = useNavigate()
+
   const handleSubmit = (formData: FormData) => {
     (async () => {
       const date = validator.link.parse({
@@ -14,6 +17,10 @@ export const CreateLink = () => {
         body: JSON.stringify(date),
         credentials: 'include'
       })
+
+      if(res.ok) {
+        navigate('/')
+      }
     })()
   }
 

@@ -25,8 +25,9 @@ export const AccessLink = () => {
         }
         
         const body = await res.json()
-
         window.location.replace(body.redirect)
+
+        setLink(body.redirect)
       } catch (error) {
         console.error('Error fetching link:', error)
         hasCalledApi.current = false
@@ -37,6 +38,12 @@ export const AccessLink = () => {
   }, [])
 
   return (
-    <></>
+    <>
+      {
+        link && hasCalledApi ?
+        <p>Loading...</p> :
+        <>This link is invalid</>
+      }
+    </>
   )
 }

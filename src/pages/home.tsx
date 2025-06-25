@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../services/auth'
 import { LinkCard } from '../components/LinkCard'
 
@@ -14,6 +14,21 @@ export const Home = () => {
   const { isPending, data } = auth.useSession()
   const [ links, setLinks ] = useState([])
   const navigate = useNavigate()
+
+  const handleDelete = async (id: String) => {
+    const res = await fetch(`http://192.168.1.107:3333/api/v1/link/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if(!res.ok) {
+      alert('Error on delete link')
+    }
+
+    window.location.reload()
+  }
 
   useEffect(() => {
     if(!isPending && !data?.user) navigate('/sign-in')
@@ -31,9 +46,10 @@ export const Home = () => {
   }, [])
 
   return <div>
+    <Link to={'/create'} className='bg-blue-500 p-4 w-[300px] block text-center m-auto mt-[5vw] rounded-xl text-blue-50'>Create Link</Link>
     <div className='p-4 flex flex-col gap-2'>
       { links.map((link: Link, index) => {
-        return <LinkCard key={index} redirect={link.redirect} clicks={link.clicks} created_at={link.createdAt} id={link.id}/>
+        return <LinkCard onClick={() => handleDelete(link.id)} key={index} redirect={link.redirect} clicks={link.clicks} created_at={link.createdAt} id={link.id}/>
       }) }
     </div>
   </div>
