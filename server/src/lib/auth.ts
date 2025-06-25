@@ -1,5 +1,5 @@
 import { prismaAdapter } from 'better-auth/adapters/prisma'
-import { PrismaClient } from './generated/prisma'
+import { PrismaClient } from '../generated/prisma'
 import { jwt } from 'better-auth/plugins'
 import { betterAuth } from 'better-auth'
 

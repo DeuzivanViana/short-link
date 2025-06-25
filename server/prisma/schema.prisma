@@ -28,6 +28,7 @@ model User {
   image         String?
   createdAt     DateTime
   updatedAt     DateTime
+  roles         String @default("user:write:read")
   sessions      Session[]
   accounts      Account[]
 
