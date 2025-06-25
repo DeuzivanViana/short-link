@@ -31,9 +31,10 @@ export const Home = () => {
   }, [])
 
   return <div>
-    { links.map((link: Link, index) => {
-      return <LinkCard key={index} redirect={link.redirect} clicks={link.clicks} created_at={link.createdAt} id={link.id}/>
-    }) }
-    
+    <div className='p-4 flex flex-col gap-2'>
+      { links.map((link: Link, index) => {
+        return <LinkCard key={index} redirect={link.redirect} clicks={link.clicks} created_at={link.createdAt} id={link.id}/>
+      }) }
+    </div>
   </div>
 }

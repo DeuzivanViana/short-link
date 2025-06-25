@@ -3,11 +3,18 @@ import cors from 'cors'
 import { fromNodeHeaders, toNodeHandler } from 'better-auth/node'
 import { auth } from './auth'
 import { validator } from './models/validator'
-import { authClient } from './auth-client'
+import { rateLimit } from 'express-rate-limit'
 import { db } from './lib/database'
 import cuid from 'cuid'
 
 const app = express()
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	limit: 100,
+	standardHeaders: 'draft-8',
+	legacyHeaders: false,
+})
 
 app.use(cors({
   origin: 'http://192.168.1.107:3000',
@@ -15,6 +22,7 @@ app.use(cors({
 }))
 app.all('/api/v1/auth/*splat', toNodeHandler(auth))
 app.use(express.json())
+app.use(limiter)
 
 app.post('/api/v1/link', async (req, res) => {
   try {
