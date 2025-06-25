@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../services/auth'
 import { LinkCard } from '../components/LinkCard'
+import { Layout } from '../components/Layout'
 
 type Link = {
   redirect: String,
@@ -45,12 +46,12 @@ export const Home = () => {
     })()
   }, [])
 
-  return <div>
-    <Link to={'/create'} className='bg-blue-500 p-4 w-[300px] block text-center m-auto mt-[5vw] rounded-xl text-blue-50'>Create Link</Link>
-    <div className='p-4 flex flex-col gap-2'>
+  return <Layout>
+    <div className='p-4 flex flex-col gap-2 max-w-[500px] m-auto'>
+    <Link to={'/create'} className='bg-blue-500 p-4 w-full block text-center rounded-xl text-blue-50'>Create Link</Link>
       { links.map((link: Link, index) => {
         return <LinkCard onClick={() => handleDelete(link.id)} key={index} redirect={link.redirect} clicks={link.clicks} created_at={link.createdAt} id={link.id}/>
       }) }
     </div>
-  </div>
+  </Layout>
 }
