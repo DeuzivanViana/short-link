@@ -18,10 +18,11 @@ export const Home = () => {
 
   const handleDelete = async (id: String) => {
     const res = await fetch(`http://192.168.1.107:3333/api/v1/link/${id}`, {
-      method: 'DELETE',
+      method: 'delete',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'include'
     })
 
     if(!res.ok) {
@@ -39,7 +40,8 @@ export const Home = () => {
     (async () => {
       const res = await fetch('http://192.168.1.107:3333/api/v1/link', {
         method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-cache'
       })
 
       setLinks(await res.json())

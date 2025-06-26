@@ -60,6 +60,38 @@ export const getMyLinks = async (req: Request, res: Response) => {
   }
 }
 
+export const accessLinkById = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id
+
+    const link = await db.link.findFirst({
+      where: {
+        id: id
+      }
+    })
+
+    if(!link) throw new ApiError('Link not found', 404)
+
+    await db.link.update({
+      data: {
+        clicks: link.clicks + 1
+      },
+      where: {
+        id: link.id
+      }
+    })
+
+    res.status(200).json(link)
+  } catch(err) {
+    if(err instanceof ApiError) {
+      res.status(err.statusCode).json({message: err.message})
+    } else {
+      res.status(500).json({ message: 'Unknow error'})
+    }
+  }
+
+}
+
 export const addClicksByLinkId = async (req: Request, res: Response) => {
   try {
     const id = req.params.id

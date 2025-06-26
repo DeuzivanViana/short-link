@@ -3,13 +3,15 @@ import {
   addLink,
   getMyLinks,
   addClicksByLinkId,
-  deleteLinkByAuth
+  deleteLinkByAuth,
+  accessLinkById
 } from '../controller/link-controller'
 
 const linkRouter = express.Router()
 
 linkRouter.post('/', addLink)
 linkRouter.get('/', getMyLinks)
+linkRouter.get('/:id', accessLinkById)
 linkRouter.post('/:id', addClicksByLinkId)
 linkRouter.delete('/:id', deleteLinkByAuth)
 

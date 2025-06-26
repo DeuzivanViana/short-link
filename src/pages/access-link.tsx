@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export const AccessLink = () => {
   const { id } = useParams()
   const [link, setLink] = useState<any>()
-  const navigate = useNavigate()
   const hasCalledApi = useRef(false)
 
   useEffect(() => {
