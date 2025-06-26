@@ -1,4 +1,3 @@
-import { redirect } from 'react-router-dom'
 import { z } from 'zod'
 
 export const validator = {
