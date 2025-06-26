@@ -4,6 +4,7 @@ import { toNodeHandler } from 'better-auth/node'
 import { auth } from './lib/auth'
 import { rateLimit } from 'express-rate-limit'
 import { linkRouter } from './routes/link-routes'
+import { userRouter } from './routes/user-routes'
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use(express.json())
 app.use(limiter)
 
 app.use('/api/v1/link', linkRouter)
+app.use('/api/v1/user', userRouter)
 
 app.listen(3333, () => {
   console.log('Backend is running at port 3333...')

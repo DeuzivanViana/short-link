@@ -7,6 +7,7 @@ import { SignUp } from './pages/sign-up'
 import { SignIn } from './pages/sign-in'
 import { CreateLink } from './pages/create'
 import { AccessLink } from './pages/access-link'
+import { Dashboard } from './pages/dashboard'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/sign-in' element={ <SignIn/> }/>
         <Route path='/create' element={ <CreateLink/> }/>
         <Route path='/l/:id' element={ <AccessLink/> }/>
+        <Route path='/dashboard' element={ <Dashboard/> }/>
       </Routes>
     </BrowserRouter>
   </StrictMode>,

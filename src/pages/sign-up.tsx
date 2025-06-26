@@ -13,19 +13,18 @@ export const SignUp = () => {
 
   const handleSignUp = (formData: FormData) => {
     (async () => {
-      const data = validator.sign_in.parse({
+      const data = validator.sign_up.parse({
         email: formData.get('email'),
-        password: formData.get('password')
+        password: formData.get('password'),
+        name: formData.get('name')
       })
 
-      auth.signUp.email({
-        ...data,
-        name: 'Your name'
-      })
+      auth.signUp.email(data)
     })()
   } 
   return <div>
     <form className='bg-neutral-900 text-neutral-50 p-6 rounded-lg m-auto w-[350px] flex flex-col gap-4 mt-[25vh]' action={handleSignUp}>
+      <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Enter your name' type='text' name='name'/>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Enter a email' type='email' name='email'/>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Type a password' type='password' name='password'/>
       <input className='bg-neutral-800 p-4  outline-none rounded-lg' placeholder='Confirm your password' type='password' name='password2'/>

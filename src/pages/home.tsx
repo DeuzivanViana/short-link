@@ -18,7 +18,7 @@ export const Home = () => {
 
   const handleDelete = async (id: String) => {
     const res = await fetch(`http://192.168.1.107:3333/api/v1/link/${id}`, {
-      method: 'delete',
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },

@@ -13,3 +13,7 @@ export const notHasRole = async (sessino: any, role: string) => {
 
   return roles ? !roles.includes(role) : true
 }
+
+export const hasRole = async (sessino: any, role: string) => {
+  return !notHasRole(sessino, role)
+}
